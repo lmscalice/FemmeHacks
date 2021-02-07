@@ -21,7 +21,7 @@ export default class RegisterScreen extends React.Component {
                     <TouchableOpacity style={styles.homeScreenButton}
                         onPress={() => this.props.navigation.navigate("BudgetScreen")}
                         underLayColor = '#fff' >
-                            <Text style={styles.buttonText}>Set Up Your Budget</Text>
+                            <Text style={styles.buttonText}> Budget Calculator </Text>
                     </TouchableOpacity>  
                 </View>  
 
@@ -29,7 +29,7 @@ export default class RegisterScreen extends React.Component {
                     <TouchableOpacity style={styles.homeScreenButton}
                         onPress={() => this.props.navigation.navigate("ReceiptScreen")}
                         underLayColor = '#fff' >
-                            <Text style={styles.buttonText}>Receipts</Text>
+                            <Text style={styles.buttonText}>Receipts and Progress</Text>
                     </TouchableOpacity>  
                 </View>  
 
