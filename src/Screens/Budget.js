@@ -6,26 +6,28 @@ import {
 
 export default class RegisterScreen extends React.Component {
     state = {
-        income: "",
+        income: '',
 
-        rent: "",
-        groceries: "",
-        utilities:"",
-        savings:"",
-        debt:"",
+        rent: '',
+        groceries: '',
+        utilities:'',
+        savings:'',
+        debt:'',
 
-        wants:""
+        wants:''
     };
 
     calc = () => {
-        var needs = parseFloat(this.state.rent) + parseFloat(this.state.debt) + parseFloat(this.state.groceries) + parseFloat(this.state.utilities) + parseFloat(this.state.savings);
-        this.state.wants = (parseFloat(this.state.income) - needs).toString();
+        var extra = Number(this.state.income) - (Number(this.state.rent) + Number(this.state.debt) + Number(this.state.groceries) + Number(this.state.utilities) + Number(this.state.savings));
+        this.setState({
+            wants: extra
+          });
     }
 
     render() {
         return (
             <ScrollView style = {{backgroundColor: '#fffaf0'}}>
-                <Text style={{fontSize: 35, color: "#8fbc8f", alignSelf: 'center'}}>Budget Calculator</Text>
+                <Text style={{fontSize: 35, color: "#8fbc8f", alignSelf: 'center', paddingTop:2, paddingBottom:2}}>Budget Calculator</Text>
 
                 <View style={styles.form}>
                         <View>
@@ -38,7 +40,7 @@ export default class RegisterScreen extends React.Component {
                             ></TextInput>
                         </View>
 
-                        <Text>Necessities</Text>
+                        <Text style={{paddingTop:10,paddingBottom: 3, fontSize: 20, color: "#8fbc8f", alignSelf: 'center' }}>Necessities</Text>
 
                         <View>
                             <Text style={styles.inputTitle}> Monthly Rent</Text>
@@ -91,25 +93,26 @@ export default class RegisterScreen extends React.Component {
                         </View>
                 </View>
 
-                <View>
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                     <TouchableOpacity style={styles.Button}
                         onPress={() => this.calc()}
                         underLayColor = '#fffaf0' >
                         <FontAwesome name="calculator"
-                                style={{ color: '#8fbc8f', fontSize: 20, alignItems: 'center'}}> 
-                    </FontAwesome><Text >Calculate!</Text>
+                                style={styles.buttonText}> <Text style={styles.buttonText}> Calculate!</Text>
+                    </FontAwesome>
                     </TouchableOpacity>  
                 </View> 
 
-                <Text style={{fontSize: 20, color: "#8fbc8f", alignSelf: 'center'}}> Money Available for Use: {this.state.wants}</Text> 
+                <Text style={{fontSize: 20, color: "#8A8F9E", alignSelf: 'left'}}> {`Money Available for Use: $ ${this.state.wants}`}</Text> 
 
-                <Text style={{fontSize: 25, color: "#8fbc8f", alignSelf: 'center'}} >How on Target Are You Based on Your Expenses?</Text>
-                <View>
+                <Text style={{fontSize: 20, color: "#8fbc8f", alignSelf: 'center', paddingTop:30}} >Progress Report Based on Expenses?</Text>
+                
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                     <TouchableOpacity style={styles.Button}
                         onPress={() => this.props.navigation.navigate("ReceiptScreen")}
                         underLayColor = '#fffaf0' >
                         <FontAwesome name="long-arrow-right"
-                                style={{ color: '#8fbc8f', fontSize: 20, alignItems: 'center'}}> 
+                                style={styles.buttonText}> 
                     </FontAwesome></TouchableOpacity>  
                 </View>  
 
@@ -120,9 +123,8 @@ export default class RegisterScreen extends React.Component {
 
 const styles = StyleSheet.create({
     Button: {
+        paddingBottom:5,
         alignItems: 'center',
-        paddingTop:15,
-        paddingBottom:15,
         backgroundColor:'#8fbc8f',
         borderRadius:10,
         borderWidth: 1,
@@ -133,18 +135,8 @@ const styles = StyleSheet.create({
     buttonText:{
         color:'#fffaf0',
         textAlign:'center',
-        paddingLeft : 10,
-        paddingRight : 10,
-        fontSize: 17,
-        margin: -5
-    },
-    buttonText:{
-        color:'#fffaf0',
-        textAlign:'center',
-        paddingLeft : 10,
-        paddingRight : 10,
-        fontSize: 17,
-        margin: -5
+        fontSize: 20,
+        margin: 7
     },
     form: {
         marginBottom: 48,
@@ -153,7 +145,8 @@ const styles = StyleSheet.create({
     inputTitle: {
         color: "#8A8F9E",
         fontSize: 10,
-        textTransform: "uppercase"
+        textTransform: "uppercase",
+        paddingTop:5
     },
     input: {
         borderBottomColor: "#8A8F9E",
