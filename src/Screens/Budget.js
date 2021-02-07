@@ -14,13 +14,23 @@ export default class RegisterScreen extends React.Component {
         savings:'',
         debt:'',
 
-        wants:''
+        wants:'',
+        large_iced_coffee:'',
+        movie:'',
+
     };
 
     calc = () => {
         var extra = Number(this.state.income) - (Number(this.state.rent) + Number(this.state.debt) + Number(this.state.groceries) + Number(this.state.utilities) + Number(this.state.savings));
+
+        var iced = extra/2;
+        var movies = extra/9;
+
+
         this.setState({
-            wants: extra
+            wants: extra,
+            large_iced_coffe: iced,
+            movie:movies
           });
     }
 
@@ -104,17 +114,12 @@ export default class RegisterScreen extends React.Component {
                 </View> 
 
                 <Text style={{fontSize: 20, color: "#8A8F9E", alignSelf: 'left'}}> {`Money Available for Use: $ ${this.state.wants}`}</Text> 
-
-                <Text style={{fontSize: 20, color: "#8fbc8f", alignSelf: 'center', paddingTop:30}} >Progress Report Based on Expenses?</Text>
                 
-                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                    <TouchableOpacity style={styles.Button}
-                        onPress={() => this.props.navigation.navigate("ReceiptScreen")}
-                        underLayColor = '#fffaf0' >
-                        <FontAwesome name="long-arrow-right"
-                                style={styles.buttonText}> 
-                    </FontAwesome></TouchableOpacity>  
-                </View>  
+                <Text style={{fontSize: 10, color: "#8A8F9E", alignSelf: 'left'}}> With This Money You Can Buy:</Text> 
+
+                <Text style={{fontSize: 10, color: "#8A8F9E", alignSelf: 'left'}}> {`Number of Iced Coffees ($2/each): $ ${this.state.large_iced_coffee}`}</Text> 
+                <Text style={{fontSize: 10, color: "#8A8F9E", alignSelf: 'left'}}> {`Number of Movie Tickets ($9/each): $ ${this.state.movie}`}</Text> 
+
 
             </ScrollView>
         )
