@@ -100,6 +100,8 @@ export default class RegisterScreen extends React.Component {
             <View style = {{marginTop:20}}>
             <Button title = "Get Receipts" onPress={this.getReceipts} />
             </View>
+            
+            <Text>`Receipts: ${this.state.allItems}`</Text>
         </View>   
         )
     }
